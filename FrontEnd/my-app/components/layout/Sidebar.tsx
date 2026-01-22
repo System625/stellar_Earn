@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { LevelBadge } from '@/components/reputation/LevelBadge';
 
 interface SidebarProps {
   user?: {
@@ -61,7 +62,7 @@ export function Sidebar({ user = { name: 'john.doe', level: 12 } }: SidebarProps
       {/* Mobile menu button */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="fixed left-4 top-4 z-50 rounded-lg bg-white p-2 shadow-lg lg:hidden"
+        className="fixed right-4 top-4 z-50 rounded-lg bg-white p-2 shadow-lg lg:hidden"
         aria-label="Toggle menu"
       >
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -133,9 +134,12 @@ export function Sidebar({ user = { name: 'john.doe', level: 12 } }: SidebarProps
             <p className="text-sm font-medium text-zinc-900 dark:text-zinc-50 truncate">
               {user.name}
             </p>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400">
-              Level {user.level}
-            </p>
+            <div className="flex items-center gap-2 mt-1">
+              <LevelBadge level={user.level} size="sm" />
+              <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                Level {user.level}
+              </span>
+            </div>
           </div>
         </div>
         <Link
